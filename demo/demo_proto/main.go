@@ -1,15 +1,18 @@
 package main
 
 import (
+	nacos_config "github.com/cloudwego/biz-demo/gomall/demo/demo_proto/common"
+	"log"
 	"net"
 	"time"
 
+	"github.com/cloudwego/biz-demo/gomall/demo/demo_proto/conf"
+	"github.com/cloudwego/biz-demo/gomall/demo/demo_proto/kitex_gen/api/echoservice"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	kitexlogrus "github.com/kitex-contrib/obs-opentelemetry/logging/logrus"
-	"github.com/cloudwego/biz-demo/gomall/demo/demo_proto/conf"
-	"github.com/cloudwego/biz-demo/gomall/demo/demo_proto/kitex_gen/api/echoservice"
+	"github.com/kitex-contrib/registry-nacos/registry"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
@@ -37,6 +40,17 @@ func kitexInit() (opts []server.Option) {
 	opts = append(opts, server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
 		ServiceName: conf.GetConf().Kitex.Service,
 	}))
+
+	// 获取nacos配置
+	client, err := nacos_config.GetNacosConfig()
+
+	r := registry.NewNacosRegistry(client)
+
+	if err != nil {
+		log.Panic(err)
+	}
+
+	opts = append(opts, server.WithRegistry(r))
 
 	// klog
 	logger := kitexlogrus.NewLogger()

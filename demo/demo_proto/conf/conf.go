@@ -23,6 +23,7 @@ type Config struct {
 	MySQL    MySQL    `yaml:"mysql"`
 	Redis    Redis    `yaml:"redis"`
 	Registry Registry `yaml:"registry"`
+	Nacos    Nacos    `yaml:"nacos"`
 }
 
 type MySQL struct {
@@ -53,6 +54,20 @@ type Registry struct {
 	RegistryAddress []string `yaml:"registry_address"`
 	Username        string   `yaml:"username"`
 	Password        string   `yaml:"password"`
+}
+
+type Nacos struct {
+	Address             string `yaml:"address"`
+	Port                int    `yaml:"port"`
+	Namespace           string `yaml:"namespace"`
+	Group               string `yaml:"group"`
+	Username            string `yaml:"username"`
+	Password            string `yaml:"password"`
+	LogDir              string `yaml:"log_dir"`
+	CacheDir            string `yaml:"cache_dir"`
+	LogLevel            string `yaml:"log_level"`
+	TimeoutMs           uint64 `yaml:"timeout_ms"`
+	NotLoadCacheAtStart bool   `yaml:"not_load_cache_at_start"`
 }
 
 // GetConf gets configuration instance

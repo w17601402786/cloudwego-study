@@ -9,9 +9,22 @@ kitex:
 
 registry:
   registry_address:
-    - 127.0.0.1:2379
+    - 127.0.0.1:8500
   username: ""
   password: ""
+
+nacos:
+    address: "127.0.0.1"
+    port: 8848
+    namespace: ""
+    group: "DEFAULT_GROUP"
+    username: ""
+    password: ""
+    log_dir: "/tmp/nacos/log"
+    cache_dir: "/tmp/nacos/cache"
+    log_level: "debug"
+
+
 
 mysql:
   dsn: "gorm:gorm@tcp(127.0.0.1:3306)/gorm?charset=utf8mb4&parseTime=True&loc=Local"
