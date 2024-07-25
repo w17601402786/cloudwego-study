@@ -2,6 +2,7 @@ package main
 
 import (
 	nacos_config "github.com/cloudwego/biz-demo/gomall/demo/demo_proto/common"
+	"github.com/joho/godotenv"
 	"log"
 	"net"
 	"time"
@@ -18,11 +19,17 @@ import (
 )
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	opts := kitexInit()
 
 	svr := echoservice.NewServer(new(EchoServiceImpl), opts...)
 
-	err := svr.Run()
+	err = svr.Run()
 	if err != nil {
 		klog.Error(err.Error())
 	}

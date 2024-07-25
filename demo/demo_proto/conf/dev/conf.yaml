@@ -14,16 +14,17 @@ registry:
   password: ""
 
 nacos:
-    address: "127.0.0.1"
-    port: 8848
-    namespace: ""
-    group: "DEFAULT_GROUP"
-    username: ""
-    password: ""
-    log_dir: "/tmp/nacos/log"
-    cache_dir: "/tmp/nacos/cache"
-    log_level: "debug"
-
+  address: "127.0.0.1"
+  port: 8848
+  namespace: ""
+  group: "DEFAULT_GROUP"
+  username: ""
+  password: ""
+  log_dir: "/tmp/nacos/log"
+  cache_dir: "/tmp/nacos/cache"
+  log_level: "debug"
+  timeous_ms: 5000
+  not_load_cache_at_start: true
 
 
 mysql:
